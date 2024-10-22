@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Đăng Nhập";
+}
+
+<div style="width:300px; margin:auto; text-align:center; background-color:#ddd; padding:20px; border-radius:10px;">
+    <h2>Đăng Nhập</h2>
+
+    <form method="post" action="/Account/Login">
+        <input type="text" name="username" placeholder="Tên đăng nhập" required style="width:90%; margin-bottom:10px;" />
+        <input type="password" name="password" placeholder="Mật khẩu" required style="width:90%; margin-bottom:10px;" />
+        <button type="submit" style="background-color:#6A5ACD; color:white; padding:10px 20px; border:none; border-radius:25px;">
+            Đăng nhập
+        </button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <p style="color:red;">@ViewBag.ErrorMessage</p>
+    }
+</div>

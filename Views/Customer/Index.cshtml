@@ -1,0 +1,38 @@
+@model IEnumerable<NMCNPM.Models.Customer>
+
+<h2>Customer List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Họ tên</th>
+            <th>Số điện thoại</th>
+            <th>Email</th>
+            <th>Địa chỉ</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.CustomerID</td>
+                <td>@customer.HoTenKH</td>
+                <td>@customer.SDTKH</td>
+                <td>@customer.EmailKH</td>
+                <td>@customer.DiaChiKH</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@customer.CustomerID" 
+                       class="btn btn-primary text-white" style="margin-right: 5px;">
+                        Sửa
+                    </a>|  
+                    <form asp-action="Delete" asp-route-id="@customer.CustomerID" method="post" style="display:inline;" 
+                          onsubmit="return confirm('Bạn có chắc muốn xóa khách hàng này không?');">
+                        <button type="submit" class="btn btn-danger">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="@Url.Action("Create")">Thêm khách hàng mới</a>
