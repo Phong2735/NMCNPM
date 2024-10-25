@@ -5,6 +5,42 @@
       "PackagePath": "staticwebassets\\NMCNPM.bundle.scp.css"
     },
     {
+      "Id": "E:\\LTW\\NMCNPM\\NMCNPM\\wwwroot\\Image\\default_vehicle_image.png",
+      "PackagePath": "staticwebassets\\Image\\default_vehicle_image.png"
+    },
+    {
+      "Id": "E:\\LTW\\NMCNPM\\NMCNPM\\wwwroot\\Image\\hyundai-tucson.png",
+      "PackagePath": "staticwebassets\\Image\\hyundai-tucson.png"
+    },
+    {
+      "Id": "E:\\LTW\\NMCNPM\\NMCNPM\\wwwroot\\Image\\logo.png",
+      "PackagePath": "staticwebassets\\Image\\logo.png"
+    },
+    {
+      "Id": "E:\\LTW\\NMCNPM\\NMCNPM\\wwwroot\\Image\\vision-denbong.png",
+      "PackagePath": "staticwebassets\\Image\\vision-denbong.png"
+    },
+    {
+      "Id": "E:\\LTW\\NMCNPM\\NMCNPM\\wwwroot\\Image\\vision-xam.png",
+      "PackagePath": "staticwebassets\\Image\\vision-xam.png"
+    },
+    {
+      "Id": "E:\\LTW\\NMCNPM\\NMCNPM\\wwwroot\\Image\\wave-a-den.png",
+      "PackagePath": "staticwebassets\\Image\\wave-a-den.png"
+    },
+    {
+      "Id": "E:\\LTW\\NMCNPM\\NMCNPM\\wwwroot\\Image\\wave-do.png",
+      "PackagePath": "staticwebassets\\Image\\wave-do.png"
+    },
+    {
+      "Id": "E:\\LTW\\NMCNPM\\NMCNPM\\wwwroot\\Image\\wave-rsx-xanh.png",
+      "PackagePath": "staticwebassets\\Image\\wave-rsx-xanh.png"
+    },
+    {
+      "Id": "E:\\LTW\\NMCNPM\\NMCNPM\\wwwroot\\Image\\zx10r.png",
+      "PackagePath": "staticwebassets\\Image\\zx10r.png"
+    },
+    {
       "Id": "E:\\LTW\\NMCNPM\\NMCNPM\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

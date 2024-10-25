@@ -10,7 +10,9 @@ namespace NMCNPM.Data  // Đảm bảo đúng namespace
 
         public DbSet<Vehicle> Vehicle { get; set; }
         public DbSet<Customer> Customer { get; set; }
-        public DbSet<Employee> Employee { get; set; }
-        public DbSet<UserAccount> UserAccount { get; set; }
+        public DbSet<Employee> Employee { get; set; }        
+        public DbSet<Admin> Admin { get; set; }    
+        public DbSet<KHVehicle> KHVehicle {get;set;}
+
     }
 }

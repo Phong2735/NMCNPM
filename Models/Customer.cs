@@ -17,9 +17,10 @@ namespace NMCNPM.Models
 
         [EmailAddress]
         [StringLength(50)]
-        public string EmailKH { get; set; }  // Email khách hàng
+        public string? EmailKH { get; set; }  // Email khách hàng
 
         [StringLength(255)]
-        public string DiaChiKH { get; set; }  // Địa chỉ khách hàng
+        public string? DiaChiKH { get; set; }  // Địa chỉ khách hàng
+        public string Password {get; set;}
     }
 }

@@ -1,0 +1,28 @@
+@model string
+
+@{
+    string badgeClass;
+    string badgeText;
+
+    switch (Model)
+    {
+        case "Available":
+            badgeClass = "bg-success";
+            badgeText = "Khả dụng";
+            break;
+        case "Rented":
+            badgeClass = "bg-warning";
+            badgeText = "Không khả dụng";
+            break;
+        case "Maintenance":
+            badgeClass = "bg-danger";
+            badgeText = "Bảo trì";
+            break;
+        default:
+            badgeClass = "bg-secondary";
+            badgeText = "Không xác định";
+            break;
+    }
+}
+
+<span class="badge @badgeClass">@badgeText</span>

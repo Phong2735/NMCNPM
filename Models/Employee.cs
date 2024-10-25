@@ -21,5 +21,6 @@ namespace NMCNPM.Models
         [EmailAddress]
         [StringLength(50)]
         public string EmailNV { get; set; }  // Email của nhân viên
+        public string Password {get; set;}
     }
 }

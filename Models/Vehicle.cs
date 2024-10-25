@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace NMCNPM.Models
 {
@@ -12,12 +13,16 @@ namespace NMCNPM.Models
 
     public string LoaiXe { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Tình trạng là bắt buộc.")]
+    [RegularExpression("Available|Rented|Maintenance", 
+        ErrorMessage = "Tình trạng phải là 'Available', 'Rented', hoặc 'Maintenance'.")]
     public string TinhTrang { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Giá thuê là bắt buộc.")]
+        [Range(0, 10000000, ErrorMessage = "Giá thuê phải lớn hơn hoặc bằng 0.")]
     public decimal GiaThue { get; set; }
 
     public string MoTa { get; set; }
+    public string? Image {get; set;}
 }
 }

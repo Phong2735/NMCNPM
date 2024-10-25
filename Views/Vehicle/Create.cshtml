@@ -1,0 +1,91 @@
+@model NMCNPM.Models.Vehicle
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Xe Mới</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container my-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header text-center bg-primary text-white fs-4 fw-bold">
+            <i class="bi bi-car-front-fill"></i> Thêm Xe Mới
+        </div>
+        <div class="card-body p-5 bg-light">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="BienSoXe" class="form-label fw-bold">Biển số xe</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                            <input asp-for="BienSoXe" class="form-control" placeholder="Nhập biển số xe" />
+                        </div>
+                        <span asp-validation-for="BienSoXe" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="LoaiXe" class="form-label fw-bold">Loại xe</label>
+                        <input asp-for="LoaiXe" class="form-control" placeholder="Nhập loại xe" />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="TinhTrang" class="form-label fw-bold">Tình trạng</label>
+                        <select asp-for="TinhTrang" class="form-select">
+                            <option value="Available">Khả dụng</option>
+                            <option value="Rented">Không khả dụng</option>
+                            <option value="Maintenance">Bảo trì</option>
+                        </select>
+                        <span asp-validation-for="TinhTrang" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="GiaThue" class="form-label fw-bold">Giá thuê</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
+                            <input asp-for="GiaThue" type="number" step="0.01" class="form-control" placeholder="Nhập giá thuê" />
+                        </div>
+                        <span asp-validation-for="GiaThue" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MoTa" class="form-label fw-bold">Mô tả</label>
+                    <textarea asp-for="MoTa" class="form-control" rows="3" placeholder="Nhập mô tả về xe"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Tải ảnh xe</label>
+                    <input type="file" class="form-control" name="Image" accept="image/*" />
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="bi bi-save-fill"></i> Lưu
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6/CkgyEwsuZUU7Y3eIeEvJs/kEvHBVTT1BMN6xMxRUtX3jmyP1h" crossorigin="anonymous"></script>
+
+<!-- ASP.NET Validation Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
+</html>

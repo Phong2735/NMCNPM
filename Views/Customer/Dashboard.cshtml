@@ -1,0 +1,152 @@
+@model NMCNPM.Models.CustomerVehicleViewModel
+
+@{
+    ViewData["Title"] = "Customer Dashboard";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Khách hàng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+        .navbar {
+            background-color: #e0e0e0;
+        }
+        .navbar a {
+            color: #333;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .logo {
+        height: 50px; /* Điều chỉnh kích thước tùy ý */
+        width: auto;
+        vertical-align: middle;
+        }
+        .carousel-item {
+            overflow: hidden; /* Ẩn những phần ảnh vượt ra ngoài khung */
+        }
+        .carousel-item img {
+            height: 400px; /* Điều chỉnh chiều cao theo ý bạn */
+        width: 100%; /* Ảnh rộng theo khung chứa */
+        object-fit: cover; /* Ảnh vừa khung, cắt những phần thừa nếu cần */
+        display: block;
+        }
+        .car-list {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .car-card {
+            background-color: #dedede;
+            width: 30%;
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .car-card img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .car-card h5 {
+            margin-top: 10px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e0e0e0;
+        }
+        .search-input {
+        height: 30px; 
+        font-size: 14px; 
+        padding: 5px 10px;
+        }
+        .search-btn {
+           height: 30px; 
+        font-size: 14px; 
+        padding: 0 10px; 
+        line-height: 1; 
+        white-space: nowrap; 
+        }
+        .search-form {
+        gap: 5px; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand" ><img src="/Image/logo.png" alt="Logo" class="logo"></a>
+            <div class="collapse navbar-collapse justify-content-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-action="PageBook">Đặt xe</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Giới thiệu</a></li>
+                </ul>
+            </div>
+            <form class="d-flex search-form">
+                <input class="form-control me-2 search-input" type="search" placeholder="Thanh tìm kiếm">
+                <button class="btn btn-outline-dark search-btn" type="submit">Tìm kiếm</button>
+            </form>
+            <div class="navbar-nav">
+                <a class="nav-link" asp-action="UpdateInf" asp-route-id="@Model.Customer.CustomerID"><i class="fa-solid fa-user"></i> @Model.Customer.HoTenKH</a>
+                <a class="nav-link" asp-action="Logout" asp-controller="Login">Đăng xuất</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/Image/wave-do.png" alt="Ảnh" class="img-fluid img-carousel">
+        </div>
+        <div class="carousel-item">
+            <img src="/Image/zx10r.png" alt="Ảnh" class="img-fluid img-carousel">
+        </div>
+        <div class="carousel-item">
+            <img src="/Image/hyundai-tucson.png" alt="Ảnh" class="img-fluid img-carousel">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+    </div>
+
+    <div class="container mt-4">
+    <h3 class="text-center">Danh sách xe được thuê nhiều nhất</h3>
+    <div class="car-list d-flex justify-content-around flex-wrap">
+        @foreach (var vehicle in Model.Vehicles)
+        {
+            <div class="car-card text-center p-3 border rounded mb-4" style="width: 300px;">
+                <img src="@vehicle.Image" alt="@vehicle.LoaiXe" class="mb-3">
+                <h5>@vehicle.LoaiXe</h5>
+                <p>Biển số: @vehicle.BienSoXe</p>
+                <p>Giá thuê: @vehicle.GiaThue VND</p>
+                <a  asp-action="Detail" asp-route-id="@vehicle.VehicleID" class="btn btn-dark">Chi tiết >></a>
+            </div>
+        }
+    </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+        <p>Thuê ô tô 4 chỗ</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

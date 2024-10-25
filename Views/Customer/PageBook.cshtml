@@ -1,0 +1,239 @@
+@model NMCNPM.Models.BookViewModel
+@{
+        ViewData["Title"] = "Thông tin xe của bạn";
+        decimal tongTien=0;
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <p>@TempData["Message"]</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Khách hàng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
+    <style>
+        body {
+        background-color: #f5f5f5;
+        }
+        .navbar {
+        background-color: #e0e0e0;
+        }
+        .navbar a {
+        color: #333;
+        font-weight: bold;
+        text-decoration: none;
+        margin: 0 10px;
+        }
+
+        .logo {
+        height: 50px; /* Điều chỉnh kích thước tùy ý */
+        width: auto;
+        vertical-align: middle;
+        }
+        .carousel-item {
+        overflow: hidden; /* Ẩn những phần ảnh vượt ra ngoài khung */
+        }
+        .carousel-item img {
+        height: 400px; /* Điều chỉnh chiều cao theo ý bạn */
+        width: 100%; /* Ảnh rộng theo khung chứa */
+        object-fit: cover; /* Ảnh vừa khung, cắt những phần thừa nếu cần */
+        display: block;
+        }
+        .car-list {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+        }
+        .car-card {
+        background-color: #dedede;
+        width: 30%;
+        text-align: center;
+        padding: 15px;
+        border-radius: 10px;
+        }
+        .car-card img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+        border-radius: 10px;
+        }
+        .car-card h5 {
+        margin-top: 10px;
+        }
+        .footer {
+        text-align: center;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #e0e0e0;
+        }
+        .search-input {
+        height: 30px; 
+        font-size: 14px; 
+        padding: 5px 10px;
+        }
+        .search-btn {
+        height: 30px; 
+        font-size: 14px; 
+        padding: 0 10px; 
+        line-height: 1; 
+        white-space: nowrap; 
+        }
+        .search-form {
+        gap: 5px; 
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a asp-action="DashBoard" class="navbar-brand" ><img src="/Image/logo.png" alt="Logo" class="logo"></a>
+            <div class="collapse navbar-collapse justify-content-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" asp-action="DashBoard">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-action="PageBook">Đặt xe</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Giới thiệu</a></li>
+                </ul>
+            </div>
+            <form class="d-flex search-form">
+                <input class="form-control me-2 search-input" type="search" placeholder="Thanh tìm kiếm">
+                <button class="btn btn-outline-dark search-btn" type="submit">Tìm kiếm</button>
+            </form>
+            <div class="navbar-nav">
+                <a class="nav-link" asp-action="UpdateInf" asp-controller="Customer" asp-route-id="@Model.Customer.CustomerID"><i class="fa-solid fa-user"></i> Xin chào @Model.Customer.HoTenKH </a>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <h4 class="mb-3">Thông tin xe của bạn</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Stt</th>
+                <th>Loại xe</th>
+                <th>Ảnh</th>
+                <th>Ngày nhận xe</th>
+                <th>Ngày trả xe</th>
+                <th>Số ngày thuê</th>
+                <th>Giá</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.KHVehicles.Any())
+            {
+                int index = 1;
+                for (int i = 0; i < Model.KHVehicles.Count; i++)
+                {
+                    var khVehicle = Model.KHVehicles[i];
+                    var vehicle = Model.Vehicles.FirstOrDefault(v => v.VehicleID == khVehicle.VehicleID);
+
+                    if (vehicle != null)  
+                    {
+                    <tr id="rental-@khVehicle.RentalID">
+                        <td>@(i + 1)</td>
+                        <td>@vehicle.LoaiXe</td>
+                        <td>
+                            <img src="@(!string.IsNullOrEmpty(vehicle.Image) ? vehicle.Image : "~/images/default-car.png")" 
+                             alt="Ảnh xe" style="width: 100px; height: 80px    ;" />
+                        </td>
+                        <td>@khVehicle.NgayThue.ToString("dd/MM/yyyy")</td>
+                        <td>@khVehicle.NgayTra?.ToString("dd/MM/yyyy")</td>
+                        <td>@(khVehicle.NgayTra.Value.Subtract(khVehicle.NgayThue).Days) ngày</td>
+                        <td>@vehicle.GiaThue</td>
+                        <td>                           
+                            <button class="btn btn-danger btn-sm delete-rental" data-id="@khVehicle.RentalID">Xóa</button></td>
+                    </tr>
+                    }
+                    index++;
+                    var soNgayThue = khVehicle.NgayTra.HasValue 
+                    ? (khVehicle.NgayTra.Value - khVehicle.NgayThue).Days 
+                    : 0;
+
+                    var giaThue = vehicle.GiaThue;
+                    var thanhTien = giaThue * soNgayThue;
+
+                    tongTien += thanhTien;
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center">Chưa có xe nào được đặt.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="row mt-4">
+        <div class="col-md-12 d-flex justify-content-end">
+            <div style="width: 300px;">
+                <p class="text-end">Tổng tiền: <strong id="total-amount">@tongTien.ToString("N0") VND</strong></p>
+                <form method="post" asp-action="Pay" asp-controller="Vehicle" class="text-end">
+                    <input type="hidden" name="customerID" value="1"</input>
+                    <button type="submit" class="btn btn-primary ">Thanh toán</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.delete-rental');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const rentalID = this.getAttribute('data-id');
+                    if (confirm('Bạn có chắc chắn muốn xóa xe thuê này?')) {
+                        fetch(`/Customer/DeleteKHVehicle/${rentalID}`, {
+                            method: 'DELETE',
+                            headers: { 'Content-Type': 'application/json' }
+                        })
+                        .then(async response => {
+                            const result = await response.json();
+                            if (response.ok) {
+                                const rentalRow = document.getElementById(`rental-${rentalID}`);
+                                if (rentalRow) {
+                                    rentalRow.remove();
+                                }
+                                alert(result.message || 'Xóa thành công!');
+                                updateTotalAmount();
+                            } else {
+                                alert(result.message || 'Có lỗi xảy ra khi xóa.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Có lỗi xảy ra, vui lòng thử lại.');
+                        });
+                    }
+                });
+            });
+        });
+        function updateTotalAmount() {
+        let total = 0;
+        document.querySelectorAll('tbody tr').forEach(row => {
+            const priceCell = row.querySelector('td:nth-child(7)'); 
+            const price = parseFloat(priceCell ? priceCell.textContent : 0) || 0;
+
+            const daysCell = row.querySelector('td:nth-child(6)');
+            const days = parseInt(daysCell ? daysCell.textContent : 0, 10) || 0;
+
+            total += price * days;
+        });
+
+        const totalAmountElement = document.querySelector('#total-amount');
+        totalAmountElement.textContent = total.toLocaleString('vi-VN') + ' VND';
+    }
+    </script>
+</html>
