@@ -97,8 +97,8 @@
                     <li class="nav-item"><a class="nav-link" href="#">Giới thiệu</a></li>
                 </ul>
             </div>
-            <form class="d-flex search-form">
-                <input class="form-control me-2 search-input" type="search" placeholder="Thanh tìm kiếm">
+            <form class="d-flex search-form" method="get" asp-controller="Customer" asp-action="Search">
+                <input class="form-control me-2 search-input" type="search" name="searchInput" placeholder="Nhập loại xe hoặc biển số">
                 <button class="btn btn-outline-dark search-btn" type="submit">Tìm kiếm</button>
             </form>
             <div class="navbar-nav">
@@ -129,7 +129,9 @@
     </div>
 
     <div class="container mt-4">
-    <h3 class="text-center">Danh sách xe được thuê nhiều nhất</h3>
+    <h3 class="text-center">Danh sách xe</h3>
+    <div id="vehicleList" style="display: none;">
+    </div>
     <div class="car-list d-flex justify-content-around flex-wrap">
         @foreach (var vehicle in Model.Vehicles)
         {
@@ -149,4 +151,25 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#searchForm').submit(function (e) {
+        e.preventDefault(); /
+        var searchInput = $('input[name="searchInput"]').val();
+
+        $.ajax({
+            url: '@Url.Action("Search", "Customer")',
+            type: 'GET',
+            data: { searchInput: searchInput },
+            success: function (result) {
+                $('#vehicleList').html(result).show(); 
+            },
+            error: function () {
+                alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            }
+        });
+    });
+});
+</script>
 </html>

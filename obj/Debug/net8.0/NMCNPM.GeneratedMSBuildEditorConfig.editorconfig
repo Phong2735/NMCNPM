@@ -54,6 +54,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcVXBkYXRlSW5mLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/LTW/NMCNPM/NMCNPM/Views/Customer/VehicleListSearch.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcVmVoaWNsZUxpc3RTZWFyY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/LTW/NMCNPM/NMCNPM/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

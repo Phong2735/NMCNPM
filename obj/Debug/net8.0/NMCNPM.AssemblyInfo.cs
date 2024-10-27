@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NMCNPM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6413823be79b3acfaf7ad02dd450211954ccf86b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+613c15c7b2e473dc2010b6179b32da442b878275")]
 [assembly: System.Reflection.AssemblyProductAttribute("NMCNPM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NMCNPM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

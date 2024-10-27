@@ -186,5 +186,18 @@ namespace NMCNPM
             }
             return View(model);
         }
+        public IActionResult Search(string searchInput= "")
+        {
+            
+            var vehicles = _context.Vehicle.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchInput))
+            {
+                vehicles = vehicles.Where(v => v.LoaiXe.Contains(searchInput) || 
+                                                v.BienSoXe.Contains(searchInput));
+            }
+
+            return PartialView("VehicleListSearch", vehicles.ToList());
+        }
     }
 }

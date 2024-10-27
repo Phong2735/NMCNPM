@@ -7,8 +7,9 @@ namespace NMCNPM.Models
         [Key]
         public int CustomerID { get; set; }  // Khóa chính
 
-        [Required]
-        [StringLength(100)]
+        [Required(ErrorMessage = "Họ tên không được để trống.")]
+        [StringLength(100, ErrorMessage = "Họ tên không được vượt quá 100 ký tự.")]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Họ tên chỉ được chứa chữ cái và khoảng trắng.")]
         public string HoTenKH { get; set; }  // Họ tên khách hàng
 
         [Phone]
